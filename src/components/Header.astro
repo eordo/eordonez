@@ -1,0 +1,35 @@
+---
+import Monogram from "@assets/monogram.svg"
+---
+
+<header id="site-header">
+    <a id="logo" href="/">
+        <Monogram size="48" />
+        <span>Eric Ordoñez</span>
+    </a>
+</header>
+
+<style>
+    header {
+        display: flex;
+        align-items: center;
+        place-content: space-between;
+        padding: 1rem 0;
+    }
+
+    a#logo {
+        /* Display */
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        /* Typography */
+        font-family: var(--font-family-mono);
+        font-weight: 700;
+        text-decoration: none;
+    }
+    a#logo:hover {
+        background-color: transparent;
+        color: var(--color-accent-dark);
+        fill: var(--color-accent-dark);
+    }
+</style>
