@@ -1,0 +1,16 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro"
+
+const pageTitle = "Blog"
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }))
+    .sort((a: any, b: any) => Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate))
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <h1>{pageTitle}</h1>
+    <section id="blog-posts">
+        <ul>
+            {allPosts.map((post: any) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+        </ul>
+    </section>
+</BaseLayout>

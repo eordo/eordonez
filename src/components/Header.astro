@@ -1,5 +1,8 @@
 ---
 import Monogram from "@assets/monogram.svg"
+const links = [
+    {url: "/blog/", name: "Blog"}
+]
 ---
 
 <header id="site-header">
@@ -7,6 +10,11 @@ import Monogram from "@assets/monogram.svg"
         <Monogram size="48" />
         <span>Eric Ordoñez</span>
     </a>
+    <nav>
+        <ul id="menu-items">
+            {links.map((link: any) =><li><a href={link.url}>{link.name}</a></li>)}
+        </ul>
+    </nav>
 </header>
 
 <style>
@@ -31,5 +39,24 @@ import Monogram from "@assets/monogram.svg"
         background-color: transparent;
         color: var(--color-accent-dark);
         fill: var(--color-accent-dark);
+    }
+
+    nav ul#menu-items {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        list-style: none;
+    }
+    ul#menu-items > li {
+        margin: 0 0.5rem;
+    }
+    ul#menu-items li:not(:last-child)::after {
+        content: "/";
+        margin-left: 1rem;
+    }
+    ul#menu-items a {
+        font-family: var(--font-family-mono);
+        text-decoration: none;
+        text-transform: uppercase;
     }
 </style>
