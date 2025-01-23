@@ -1,0 +1,67 @@
+:root {
+    /* FONTS */
+    --font-family-base: -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-family-mono: "SF Mono", Consolas, Menlo, monospace;
+    --font-size-base: 1.125rem;
+    --line-height-base: 1.6;
+    /* COLORS */
+    --color-bg: #fefefa;
+    --color-bg-code: #f2f2f1;
+    --color-text: #333333;
+}
+
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 0.67rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+main {
+    display: block;
+}
+
+section {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+h1 { font-size: 2.75em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.5em; }
+h4, h5, h6 { font-size: 1.25em; }
+
+a {
+    color: var(--color-text);
+    text-decoration: underline;
+}
+
+code, pre {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--color-bg-code);
+    border-radius: 4px;
+}
+code {
+    padding: 0.2em 0.4em;
+}
+pre {
+    padding: 1rem;
+    overflow-x: auto;
+}
+pre > code {
+    display: block;
+    background: none;
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+}

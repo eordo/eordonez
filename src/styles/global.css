@@ -1,0 +1,14 @@
+@import url("axiom.css");
+
+:root {
+    --color-bg-alt: #edeae0;
+    --color-highlight: #ffcc00;
+    --color-accent-dark: #005a92;
+    --color-accent-light: #0097fa;
+}
+
+a:hover {
+    background-color: var(--color-accent-dark);
+    color: var(--color-bg);
+    text-decoration: none;
+}
