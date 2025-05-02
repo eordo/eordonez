@@ -1,0 +1,19 @@
+---
+const links = [
+    {
+        url: "/blog",
+        name: "Blog"
+    }
+]
+---
+
+<header class="site-header">
+    <a class="site-logo" href="/">
+        <span>Eric Ordoñez</span>
+    </a>
+    <nav>
+        <ul class="menu-items">
+            {links.map((link: any) => <li><a href={link.url}>{link.name}</a></li>)}
+        </ul>
+    </nav>
+</header>
