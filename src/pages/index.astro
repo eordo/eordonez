@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 const pageTitle = "Ahoy-hoy!";
+const recentPosts = Object.values(import.meta.glob("./blog/*.md", { eager: true }))
+	.sort((a: any, b: any) => Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate))
+	.slice(0, 3);
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -9,5 +12,12 @@ const pageTitle = "Ahoy-hoy!";
 		<p>
 			My name is Eric Ordoñez, and welcome to my website.
 		</p>
+	</section>
+	<section id="recent-posts">
+		<h2>Recent posts</h2>
+		<ul>
+			{recentPosts.map((post: any) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+		</ul>
+		<p>See more in the <a href="/blog">blog archive</a>.</p>
 	</section>
 </BaseLayout>

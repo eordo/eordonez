@@ -1,0 +1,29 @@
+---
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import { formatDate } from "@utils/posts";
+import "@styles/global.css";
+const { frontmatter } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{frontmatter.title} | EO</title>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <h1>{frontmatter.title}</h1>
+            <div class="post-info">
+                <span class="post-description">{frontmatter.description}</span>
+                <time class="post-date" datetime={frontmatter.pubDate}>{formatDate(frontmatter.pubDate)}</time>
+            </div>
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>

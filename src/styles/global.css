@@ -47,3 +47,17 @@ footer.site-footer {
     place-content: space-between;
     font-size: smaller;
 }
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem 0.5rem;
+}
+
+.post-description {
+    font-style: italic;
+}
+
+.post-date {
+    font-weight: 600;
+}
