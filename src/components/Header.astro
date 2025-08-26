@@ -1,0 +1,34 @@
+---
+import {Image} from "astro:assets";
+import profilePic from "@/assets/eric.jpg";
+const {class: className} = Astro.props;
+const siteLinks = [
+    {href: "/", label: "About"},
+    {href: "/contact", label: "Contact"}
+];
+const activePath = Astro.url.pathname;
+---
+
+<header class={className}>
+    <Image 
+        src={profilePic} 
+        alt="My profile headshot" 
+        width={100} 
+        height={100}
+        format="webp"
+        loading="lazy"
+        fit="cover" 
+        class="profile-pic"
+    />
+    <div class="profile-headline">
+        <span><strong>Eric Ordoñez</strong></span>
+        <span>Master's student in data science. Interested in economics, statistics, cities, cooking, and languages.</span>
+    </div>
+    <nav>
+        <ul class="site-links">
+            {siteLinks.map((link) =>
+            <li><a class={link.href == activePath ? "active" : ""} href={link.href}>{link.label}</a></li>
+            )}
+        </ul>
+    </nav>
+</header>

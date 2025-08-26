@@ -1,0 +1,20 @@
+---
+const {class: className} = Astro.props;
+const license = {name: "CC BY 4.0", url: "https://creativecommons.org/licenses/by/4.0/"};
+const socialLinks = [
+    {name: "GitHub", url: "https://github.com/eordo"},
+    {name: "LinkedIn", url: "https://www.linkedin.com/in/eordo/"},
+    {name: "Source", url: "https://github.com/eordo/eordonez"}
+];
+---
+
+<footer class={className}>
+    <span>
+        &copy; EO 2025 <a href={license.url}>{license.name}</a>
+    </span>
+    <ul class="social-links">
+        {socialLinks.map((link) =>
+        <li><a href={link.url}>{link.name}</a></li>
+        )}
+    </ul>
+</footer>

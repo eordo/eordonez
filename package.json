@@ -1,0 +1,20 @@
+{
+  "name": "eordonez",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "The personal website and blog of Eric Ordonez",
+  "homepage": "https://github.com/eordo/eordonez",
+  "bugs": {
+    "url": "https://github.com/eordo/eordonez/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.12.3"
+  }
+}
