@@ -1,13 +1,28 @@
 ---
 import {Image} from "astro:assets";
 import profilePic from "@/assets/eric.jpg";
+
 const {class: className} = Astro.props;
 const siteLinks = [
     {href: "/", label: "About"},
-    {href: "/blog", label: "Blog"},
-    {href: "/contact", label: "Contact"}
+    {href: "/blog/", label: "Blog"},
+    {href: "/contact/", label: "Contact"}
 ];
-const activePath = Astro.url.pathname;
+const currentPath = Astro.url.pathname;
+
+function isActive(linkHref: string, currentPath: string): boolean {
+    // Normalize trailing slashes.
+    const normalize = (path: string) => path.endsWith('/') ? path : path + '/';
+    const normalizedLink = normalize(linkHref);
+    const normalizedCurrent = normalize(currentPath);
+    
+    // Exact match for home page.
+    if (normalizedLink === '/') {
+        return normalizedCurrent === '/';
+    }
+    // For every other page, match if current parth starts with link path.
+    return normalizedCurrent.startsWith(normalizedLink);
+}
 ---
 
 <header class={className}>
@@ -28,7 +43,9 @@ const activePath = Astro.url.pathname;
     <nav>
         <ul class="site-links">
             {siteLinks.map((link) =>
-            <li><a class={link.href == activePath ? "active" : ""} href={link.href}>{link.label}</a></li>
+            <li>
+                <a class={isActive(link.href, currentPath) ? "active" : ""} href={link.href}>{link.label}</a>
+            </li>
             )}
         </ul>
     </nav>
