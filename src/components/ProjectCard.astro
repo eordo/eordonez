@@ -1,0 +1,40 @@
+---
+export type ProjectLink = { label: string; href: string };
+interface Props {
+    title: string;
+    description: string;
+    href: string;
+    tags?: string[];
+    links?: ProjectLink[];
+}
+const { title, description, href, tags = [], links = [] } = Astro.props;
+---
+
+<div class="card">
+    <header class="card-header">
+        <h3>{title}</h3>
+        {links.length > 0 && (
+        <ul class="card-links">
+        {links.map((link) => (
+            <li class="card-link">
+                <a href={link.href} rel="noreferrer">{link.label}</a>
+            </li>
+        ))}
+        </ul>
+        )}
+    </header>
+    <a href={href} class="card-hit">
+        <div class="card-body">
+            <p>{description}</p>
+        </div>
+    </a>
+    {tags.length > 0 && (
+    <footer class="card-footer">
+        <ul class="card-tags">
+        {tags.map((tag) => (
+            <li class="card-tag">{tag}</li>
+        ))}
+        </ul>
+    </footer>
+    )}
+</div>

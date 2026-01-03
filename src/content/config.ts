@@ -8,4 +8,17 @@ const blog = defineCollection({
         tags: z.array(z.string()).default([]),
     })
 });
-export const collections = { blog };
+const projects = defineCollection({
+    type: "content",
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        date: z.coerce.date().optional(),
+        tags: z.array(z.string()).default([]),
+        links: z.array(z.object({
+            label: z.string(),
+            href: z.string().url()
+        })).default([])
+    })
+});
+export const collections = { blog, projects };

@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 .site-main-content * { max-width: 70ch; }
 .site-main-content *:first-child { margin-top: 0; }
 
-/* Footer */
+/* Footer and social links*/
 .site-footer {
     grid-area: footer;
     display: flex;
@@ -124,6 +124,57 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
     content: "\00B7";
 }
 
+/* Project grid and cards */
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.card {
+    display: block;
+    border: 1px solid var(--color-text);
+    font-size: smaller; 
+}
+.card:hover {
+    box-shadow: 0 4px 8px var(--color-text);
+}
+.card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-text-secondary);
+}
+.card-header > * { margin: 0; }
+.card-hit {
+    text-decoration: none;
+    color: var(--color-text);
+}
+.card-body {
+    padding: 1rem;
+}
+.card-links {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+}
+.card-links li > a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: small;
+    color: var(--color-text);
+}
+.card-links li > a:hover {
+    text-decoration: underline;
+}
+.card-links > li:not(:last-child)::after {
+    content: "\00B7";
+}
+
 @media (max-width: 768px) {
     :root { --site-padding: 1.5rem; }
     body { font-size: 16px; }
@@ -141,4 +192,5 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
         margin: 0;
     }
     .site-main-content { margin: 0; }
+    .project-grid { grid-template-columns: 1fr; }
 }
