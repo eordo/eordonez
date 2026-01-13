@@ -9,6 +9,10 @@
     --font-heading: "Inter", -apple-system, sans-serif;
 }
 
+html {
+    scrollbar-gutter: stable;
+}
+
 body {
     line-height: var(--line-height);
     font-size: var(--font-size);
