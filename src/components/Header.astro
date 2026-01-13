@@ -42,9 +42,9 @@ function isActive(linkHref: string, currentPath: string): boolean {
         <span>Master's student in data science. Interested in economics, statistics, cities, cooking, and languages.</span>
     </div>
     <nav>
-        <ul class="site-links">
+        <ul class="flush-list">
             {siteLinks.map((link) =>
-            <li>
+            <li class="site-link">
                 <a class={isActive(link.href, currentPath) ? "active" : ""} href={link.href}>{link.label}</a>
             </li>
             )}

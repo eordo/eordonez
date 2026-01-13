@@ -4,10 +4,9 @@ interface Props {
     title: string;
     description: string;
     href: string;
-    tags?: string[];
     links?: ProjectLink[];
 }
-const { title, description, href, tags = [], links = [] } = Astro.props;
+const { title, description, href, links = [] } = Astro.props;
 ---
 
 <div class="card">
@@ -28,13 +27,4 @@ const { title, description, href, tags = [], links = [] } = Astro.props;
             <p>{description}</p>
         </div>
     </a>
-    {tags.length > 0 && (
-    <footer class="card-footer">
-        <ul class="card-tags">
-        {tags.map((tag) => (
-            <li class="card-tag">{tag}</li>
-        ))}
-        </ul>
-    </footer>
-    )}
 </div>

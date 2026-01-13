@@ -1,0 +1,29 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import ProjectHeader from "@/components/ProjectHeader.astro";
+import TOC from "@/components/TOC.astro";
+const { title, description, status, date, tags, links, headings } = Astro.props;
+---
+
+<BaseLayout pageTitle={title} pageDescription={description}>
+    <TOC headings={headings} slot="navbar-content"/>
+    <article class="post">
+        <ProjectHeader
+            title={title}
+            description={description}
+            status={status}
+            date={date}
+            tags={tags}
+            links={links}
+        />
+        <div class="post-content">
+            <!-- Project content -->
+            <slot/>
+        </div>
+        <hr>
+        <footer class="post-footer">
+            <!-- Back to projects -->
+            <a href="/projects/">Back to projects</a>
+        </footer>
+    </article>
+</BaseLayout>

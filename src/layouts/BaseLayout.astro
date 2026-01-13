@@ -2,7 +2,7 @@
 import "@/styles/global.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-const { pageTitle } = Astro.props;
+const { pageTitle, pageDescription } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -10,6 +10,7 @@ const { pageTitle } = Astro.props;
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content={pageDescription}/>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">        
@@ -18,7 +19,10 @@ const { pageTitle } = Astro.props;
         <title>{pageTitle} | Eric Ordoñez</title>
     </head>
     <body class="site-grid">
-        <Header class="site-header"/>
+        <div class="site-navbar">
+            <Header class="site-header"/>
+            <slot name="navbar-content"/>
+        </div>
         <main class="site-main-content">
             <slot/>
         </main>

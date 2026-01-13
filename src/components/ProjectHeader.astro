@@ -1,0 +1,19 @@
+---
+import type { ProjectLink } from "./ProjectCard.astro";
+const { title, description, status, date, tags, links } = Astro.props;
+---
+
+<h1>{title}</h1>
+<header class="project-info">
+    <p class="info-description">{description}</p>
+    <ul class="flush-list">
+        <li><span class="info-label">Status: </span>{status} ({date})</li>
+        <li><span class="info-label">Tags: </span>{tags.join(", ")}</li>
+        <li>
+            <span class="info-label">Links: </span>
+            {links.map((link: ProjectLink, index: number) =>
+                <><a href={link.href}>{link.label}</a>{index < links.length - 1 && ", "}</>
+            )}
+        </li>
+    </ul>
+</header>
