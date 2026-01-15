@@ -131,6 +131,32 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
     content: "\00B7";
 }
 
+/* Post layout */
+.post-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+}
+.post-header * { margin: 0; }
+.post-tags {
+    font-size: smaller;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.post-content {
+    max-width: 75ch;
+}
+.post-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem auto;
+    font-size: smaller;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
 /* Project grid and cards */
 .project-grid {
     display: grid;
