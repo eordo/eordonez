@@ -1,10 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
 
 const pageTitle = "Blog";
 ---
 
 <BaseLayout title={pageTitle}>
-	<h1>{pageTitle}</h1>
-	<p>These are perfectly cromulent words.</p>
+	<PageHeader 
+		title={pageTitle}
+		description="Writings on economics, data science, and related topics."
+	/>
 </BaseLayout>

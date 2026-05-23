@@ -1,10 +1,21 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
 
 const pageTitle = "Home";
 ---
 
 <BaseLayout title={pageTitle}>
-	<h1>Ahoy-hoy!</h1>
-	<p>Endut! Hoch hech!</p>
+	<PageHeader
+		title="Eric Ordoñez"
+		description="Master's student in data science with a background in economics, statistics, and Simpsons references."
+	/>
+	<section>
+		<h2>Updates</h2>
+		<p>News updates to come.</p>
+	</section>
+	<section>
+		<h2>Recent</h2>
+		<p>Recent posts and projects to come.</p>
+	</section>
 </BaseLayout>

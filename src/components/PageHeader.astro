@@ -1,0 +1,19 @@
+---
+const { title, description } = Astro.props;
+---
+
+<header class="page-header">
+    <h1>{title}</h1>
+    {description && <p>{description}</p>}
+</header>
+
+<style>
+    .page-header {
+        margin-bottom: var(--space-xl);
+    }
+    .page-header p {
+        font-size: var(--step-1);
+        color: var(--muted);
+        max-width: 60ch;
+    }
+</style>

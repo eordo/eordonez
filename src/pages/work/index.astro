@@ -1,10 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
 
 const pageTitle = "Work";
 ---
 
 <BaseLayout title={pageTitle}>
-	<h1>{pageTitle}</h1>
-	<p>People can come up with statistics to prove anything. Forty percent of all people know that.</p>
+	<PageHeader
+		title={pageTitle}
+		description="Projects, research, and other things."	
+	/>
 </BaseLayout>
