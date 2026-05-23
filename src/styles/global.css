@@ -1,15 +1,33 @@
 :root {
+    /* Colors */
     --bg: #f8f7f4;
     --text: #1f1f1f;
     --muted: #666;
+    --border: #ddd;
     --accent: #1d4ed8;
+    /* Typography */
     --max-width: 72ch;
     --font-body: Georgia, serif;
-    --font-ui: -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: monospace;
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "SFMono-Regular", monospace;
+    /* Sizing */
+    --step--1: 0.889rem;
+    --step-0: 1rem;
+    --step-1: 1.125rem;
+    --step-2: 1.424rem;
+    --step-3: 1.802rem;
+    --step-4: 2.281rem;
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 6rem;
 }
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -22,17 +40,27 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-body);
+    font-size: var(--step-0);
     line-height: 1.7;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
 }
 
 .container {
     width: min(100% - 2rem, var(--max-width));
     margin-inline: auto;
-    padding-block: 4rem;
+    padding-block: var(--space-lg);
 }
 
 .site-header {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border);
 }
 
 .nav {
@@ -42,13 +70,69 @@ body {
     gap: 1.5rem;
     padding: 1rem 0;
     font-family: var(--font-ui);
+    font-size: var(--step--1);
 }
 
 .nav a {
-    color: var(--text);
+    color: var(--muted);
     text-decoration: none;
+    transition: color 120ms ease;
 }
 
 .nav a:hover {
-    color: var(--accent);
+    color: var(--text);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+}
+
+h1 {
+    font-size: var(--step-4);
+    margin-top: 0;
+}
+
+h2 {
+    font-size: var(--step-3);
+}
+
+h3 {
+    font-size: var(--step-2);
+}
+
+p,
+ul,
+ol,
+pre,
+blockquote {
+    margin-bottom: var(--space-md);
+}
+
+p {
+    color: var(--text);
+}
+
+blockquote {
+    margin-inline: 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+    color: var(--muted);
+    font-style: italic;
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+pre {
+    overflow-x: auto;
+    padding: 1rem;
+    border: 1px solid var(--border);
 }
