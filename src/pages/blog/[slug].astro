@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Prose from "@/components/Prose.astro";
 
 import { getCollection, render } from "astro:content";
 
@@ -17,8 +18,26 @@ const { Content } = await render(post);
 
 <BaseLayout title={post.data.title}>
     <article>
-        <h1>{post.data.title}</h1>
-        <p>{post.data.pubDate.toLocaleDateString()}</p>
-        <Content />
+        <header class="article-header">
+            <h1>{post.data.title}</h1>
+            <p class="article-meta">
+                {post.data.pubDate.toLocaleDateString()}
+            </p>
+        </header>
+        <Prose>
+            <Content />
+        </Prose>
     </article>
 </BaseLayout>
+
+<style>
+    .article-header {
+        margin-bottom: var(--space-xl);
+    }
+
+    .article-meta {
+        color: var(--color-muted);
+        font-family: var(--font-ui);
+        font-size: var(--step--1);
+    }
+</style>
