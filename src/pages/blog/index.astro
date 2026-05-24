@@ -1,6 +1,14 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageHeader from "@/components/PageHeader.astro";
+import ContentCard from "@/components/ContentCard.astro";
+
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog", ({ data }) => {
+	return data.draft !== true;
+})
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const pageTitle = "Blog";
 ---
@@ -10,4 +18,14 @@ const pageTitle = "Blog";
 		title={pageTitle}
 		description="Writings on economics, data science, and related topics."
 	/>
+	{
+		posts.map((post) => (
+			<ContentCard
+				href={`/blog/${post.id}`}
+				title={post.data.title}
+				description={post.data.description}
+				date={post.data.pubDate.toLocaleDateString()}
+			/>
+		))
+	}
 </BaseLayout>
