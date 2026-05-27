@@ -12,12 +12,13 @@
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --font-mono: "JetBrains Mono", monospace;
     /* Sizing */
-    --step--1: 0.889rem;
+    --step--1: 0.833rem;
     --step-0: 1rem;
-    --step-1: 1.125rem;
-    --step-2: 1.424rem;
-    --step-3: 1.802rem;
-    --step-4: 2.281rem;
+    --step-1: 1.2rem;
+    --step-2: 1.44rem;
+    --step-3: 1.728rem;
+    --step-4: 2.074rem;
+    --step-5: 2.488rem;
     /* Spacing */
     --space-xs: 0.5rem;
     --space-sm: 1rem;
@@ -52,7 +53,7 @@ body {
     color: var(--color-text);
     font-family: var(--font-serif);
     font-size: var(--step-0);
-    line-height: 1.7;
+    line-height: 1.618;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -98,27 +99,30 @@ a {
 
 h1,
 h2,
-h3,
-h4 {
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin-top: var(--space-lg);
+h3 {
+    line-height: 1.1;
+    margin-top: var(--space-md);
     margin-bottom: var(--space-sm);
     font-family: var(--font-sans);
-    font-weight: 600;
 }
 
 h1 {
-    font-size: var(--step-4);
+    letter-spacing: -0.022em;
+    font-size: var(--step-5);
+    font-weight: 700;
     margin-top: 0;
 }
 
 h2 {
+    letter-spacing: -0.022em;
     font-size: var(--step-3);
+    font-weight: 650;
 }
 
 h3 {
+    letter-spacing: -0.015em;
     font-size: var(--step-2);
+    font-weight: 600;
 }
 
 p,
