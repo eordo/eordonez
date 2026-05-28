@@ -73,30 +73,6 @@ a {
     padding-block: var(--space-lg);
 }
 
-.site-header {
-    border-bottom: 1px solid var(--color-border);
-}
-
-.nav {
-    width: min(100% - 2rem, var(--max-width));
-    margin-inline: auto;
-    display: flex;
-    gap: 1.5rem;
-    padding: 1rem 0;
-    font-family: var(--font-sans);
-    font-size: var(--step--1);
-}
-
-.nav a {
-    color: var(--color-muted);
-    text-decoration: none;
-    transition: color 120ms ease;
-}
-
-.nav a:hover {
-    color: var(--color-text);
-}
-
 h1,
 h2,
 h3 {
@@ -181,12 +157,5 @@ pre {
 
     h2 {
         font-size: var(--step-2);
-    }
-
-    .nav {
-        gap: 1rem;
-        overflow-x: auto;
-        white-space: nowrap;
-        padding-bottom: 0.75rem;
     }
 }
