@@ -1,0 +1,48 @@
+---
+const currentYear = new Date().getFullYear();
+const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/by/4.0/" };
+---
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <span>&copy; {currentYear} Eric Ordoñez</span>
+        <span>Content licensed under <a href={license.url}>{license.name}</a></spab>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        background-color: var(--color-bg);
+    }
+
+    .footer-content {
+        width: min(100% - 2rem, var(--max-width));
+        margin-inline: auto;
+        padding: 1rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-family: var(--font-sans);        
+        font-size: var(--step--1);
+    }
+
+    .footer-content > * + *::before {
+        content: "·";
+        margin-right: 0.5rem;
+    }
+
+    .footer-content p, .footer-content span {
+        color: var(--color-muted);
+    }
+
+    @media (max-width: 640px) {
+        .footer-content {
+            flex-direction: column;
+        }
+
+        .footer-content > * + *::before {
+            content: "";
+            margin-right: 0;
+        }
+    }
+</style>
