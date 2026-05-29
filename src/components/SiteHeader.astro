@@ -7,7 +7,7 @@ const siteLinks = [
 ---
 
 <header class="site-header">
-    <div class="site-header-inner">
+    <div class="site-header-inner layout-width">
         <span class="site-title"><a href="/">Eric Ordoñez</a></span>
         <nav class="site-nav">
             {siteLinks.map((siteLink) => (
@@ -23,8 +23,6 @@ const siteLinks = [
     }
 
     .site-header-inner {
-        width: min(100% - var(--space-md), var(--max-width));
-        margin-inline: auto;
         padding: var(--space-sm) 0;
         display: flex;
         flex-direction: column;
@@ -40,6 +38,7 @@ const siteLinks = [
     }
 
     .site-title > a {
+        color: var(--color-text);
         text-decoration: none;
     }
 

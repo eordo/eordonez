@@ -4,7 +4,7 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
 ---
 
 <footer class="site-footer">
-    <div class="site-footer-inner">
+    <div class="site-footer-inner layout-width">
         <span>&copy; {currentYear} Eric Ordoñez</span>
         <span>Content licensed under <a href={license.url}>{license.name}</a></spab>
     </div>
@@ -16,9 +16,7 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
     }
 
     .site-footer-inner {
-        width: min(100% - var(--space-md), var(--max-width));
-        margin-inline: auto;
-        padding: var(--space-sm);
+        padding: var(--space-sm) 0;
         display: flex;
         flex-wrap: wrap;
         gap: var(--space-xs);
@@ -35,7 +33,6 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
     @media (max-width: 640px) {
         .site-footer-inner {
             flex-direction: column;
-            padding: var(--space-sm) 0;
         }
 
         .site-footer-inner > * + *::before {

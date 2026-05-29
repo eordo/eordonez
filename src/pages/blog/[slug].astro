@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Prose from "@/components/Prose.astro";
 
 import { getCollection, render } from "astro:content";
 
@@ -17,16 +16,19 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
-    <article>
+    <article class="reading-width">
         <header class="article-header">
             <h1>{post.data.title}</h1>
+            {post.data.pubDate &&
             <p class="article-meta">
                 {post.data.pubDate.toLocaleDateString()}
-            </p>
+            </p>}
+            {post.data.description &&
+            <p class="article-meta">
+                {post.data.description}
+            </p>}
         </header>
-        <Prose>
-            <Content />
-        </Prose>
+        <Content />
     </article>
 </BaseLayout>
 
