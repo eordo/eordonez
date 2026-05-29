@@ -2,6 +2,27 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageHeader from "@/components/PageHeader.astro";
 
+import updates from "@/data/updates.yaml";
+
+interface Update {
+	date: string;
+	text: string;
+	url: string;
+}
+
+const latestUpdates: Update[] = updates.slice(0, 5);
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+	month: "short",
+	day: "numeric",
+	year: "numeric"
+});
+
+function formatDate(dateString: string) {
+	const [year, month, day] = dateString.split("-").map(Number);
+	return formatter.format(new Date(year, month - 1, day));
+}
+
 const pageTitle = "Home";
 ---
 
@@ -12,10 +33,50 @@ const pageTitle = "Home";
 	/>
 	<section>
 		<h2>Updates</h2>
-		<p>News updates to come.</p>
-	</section>
-	<section>
-		<h2>Recent</h2>
-		<p>Recent posts and projects to come.</p>
+		<ul class="updates-list">
+			{latestUpdates.map((update) => (
+				<li class="update-item">
+					<time datetime={update.date}>
+						{formatDate(update.date)}
+					</time>
+					<span>
+						{update.url ? (
+							<a href={update.url}>{update.text}</a>
+						) : (
+							update.text
+						)}
+					</span>
+				</li>
+			))}
+		</ul>
 	</section>
 </BaseLayout>
+
+<style>
+	.updates-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.update-item {
+		display: grid;
+		grid-template-columns: var(--space-xl) 1fr;
+		gap: 0.75rem 1.5rem;
+		align-items: start;
+		margin-bottom: 0.75rem;
+	}
+
+	.update-item time {
+		color: var(--color-muted);
+		font-weight: 500;
+		white-space: nowrap;
+	}
+
+	@media (max-width: 40rem) {
+		.update-item {
+			grid-template-columns: 1fr;
+			gap: 0.125rem;
+		}
+	}
+</style>
