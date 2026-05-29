@@ -4,7 +4,7 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
 ---
 
 <footer class="site-footer">
-    <div class="footer-content">
+    <div class="site-footer-inner">
         <span>&copy; {currentYear} Eric Ordoñez</span>
         <span>Content licensed under <a href={license.url}>{license.name}</a></spab>
     </div>
@@ -15,32 +15,30 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
         background-color: var(--color-bg);
     }
 
-    .footer-content {
-        width: min(100% - 2rem, var(--max-width));
+    .site-footer-inner {
+        width: min(100% - var(--space-md), var(--max-width));
         margin-inline: auto;
-        padding: 1rem 0;
+        padding: var(--space-sm);
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
+        gap: var(--space-xs);
         font-family: var(--font-sans);        
         font-size: var(--step--1);
-    }
-
-    .footer-content > * + *::before {
-        content: "·";
-        margin-right: 0.5rem;
-    }
-
-    .footer-content p, .footer-content span {
         color: var(--color-muted);
     }
 
+    .site-footer-inner > * + *::before {
+        content: "·";
+        margin-right: var(--space-xs);
+    }
+
     @media (max-width: 640px) {
-        .footer-content {
+        .site-footer-inner {
             flex-direction: column;
+            padding: var(--space-sm) 0;
         }
 
-        .footer-content > * + *::before {
+        .site-footer-inner > * + *::before {
             content: "";
             margin-right: 0;
         }
