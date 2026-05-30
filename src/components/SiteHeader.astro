@@ -7,7 +7,7 @@ const siteLinks = [
 ---
 
 <header class="site-header">
-    <div class="site-header-inner layout-width">
+    <div class="site-header-inner content-width">
         <span class="site-title"><a href="/">Eric Ordoñez</a></span>
         <nav class="site-nav">
             {siteLinks.map((siteLink) => (
@@ -19,6 +19,7 @@ const siteLinks = [
 
 <style>
     .site-header {
+        grid-area: header;
         border-bottom: 1px solid var(--color-border);
     }
 

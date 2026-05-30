@@ -7,8 +7,10 @@
     --color-border: #ddd;
     --color-accent: #1d4ed8;
     /* Layout */
-    --max-width-layout: 800px;
+    --margin-width: 12rem;
+    --max-width-content: 48rem;
     --max-width-prose: 72ch;
+    --max-width-layout: calc(var(--max-width-content) + 2 * var(--margin-width));
     /* Typography */
     --font-size: 20px;
     --font-size-mobile: 18px;
@@ -53,10 +55,6 @@ html {
 }
 
 body {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    margin: 0;
-    min-height: 100vh;
     background: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-serif);
@@ -67,16 +65,32 @@ body {
 }
 
 main {
+    grid-area: main;
     min-width: 0;
 }
 
 .container {
-    padding-block: var(--space-lg);
-}
-
-.layout-width {
+    display: grid;
+    grid-template-columns:
+        minmax(0, var(--margin-width))
+        minmax(0, var(--max-width-content))
+        minmax(0, var(--margin-width));
+    grid-template-rows:
+        auto
+        1fr
+        auto;
+    grid-template-areas:
+        ". header ."
+        "left main right"
+        ". footer .";
+    gap: var(--space-md);
+    min-height: 100vh;
     width: min(100% - var(--space-md), var(--max-width-layout));
     margin-inline: auto;
+}
+
+.content-width {
+    width: min(100% - var(--space-md), var(--max-width-content));
 }
 
 .reading-width {

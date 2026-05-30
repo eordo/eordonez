@@ -3,6 +3,7 @@ import "@/styles/global.css";
 
 import SiteHeader from "@/components/SiteHeader.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
+import SiteMargin from "@/components/SiteMargin.astro";
 
 const { title } = Astro.props;
 ---
@@ -23,10 +24,18 @@ const { title } = Astro.props;
         <title>{title} | Eric Ordoñez</title>
     </head>
     <body>
-        <SiteHeader />
-        <main class="container layout-width">
-            <slot />
-        </main>
-        <SiteFooter />
+        <div class="container">
+            <SiteHeader />
+            <SiteMargin side="left">
+                <slot name="left-margin" />
+            </SiteMargin>
+            <main class="content-width">
+                <slot />
+            </main>
+            <SiteMargin side="right">
+                <slot name="right-margin" />
+            </SiteMargin>
+            <SiteFooter />
+        </div>
     </body>
 </html>

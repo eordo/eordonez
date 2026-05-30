@@ -4,7 +4,7 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
 ---
 
 <footer class="site-footer">
-    <div class="site-footer-inner layout-width">
+    <div class="site-footer-inner content-width">
         <span>&copy; {currentYear} Eric Ordoñez</span>
         <span>Content licensed under <a href={license.url}>{license.name}</a></spab>
     </div>
@@ -12,7 +12,8 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
 
 <style>
     .site-footer {
-        background-color: var(--color-bg);
+        grid-area: footer;
+        border-top: 1px solid var(--color-border);
     }
 
     .site-footer-inner {
