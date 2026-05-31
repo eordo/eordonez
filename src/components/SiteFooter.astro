@@ -5,8 +5,11 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
 
 <footer class="site-footer">
     <div class="site-footer-inner content-width">
-        <span>&copy; {currentYear} Eric Ordoñez</span>
-        <span>Content licensed under <a href={license.url}>{license.name}</a></spab>
+        <div class="site-credits">
+            <span>&copy; {currentYear} Eric Ordoñez</span>
+            <span>Content licensed under <a href={license.url}>{license.name}</a></spab>
+        </div>
+        <span>Aut inveniam viam aut faciam.</span>
     </div>
 </footer>
 
@@ -19,24 +22,30 @@ const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/
     .site-footer-inner {
         padding: var(--space-4) 0;
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: var(--space-2);
         font-family: var(--font-sans);        
         font-size: var(--step--1);
         color: var(--color-muted);
     }
 
-    .site-footer-inner > * + *::before {
+    .site-credits {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+
+    .site-credits > * + *::before {
         content: "·";
         margin-right: var(--space-2);
     }
 
     @media (max-width: 640px) {
-        .site-footer-inner {
+        .site-credits {
             flex-direction: column;
         }
 
-        .site-footer-inner > * + *::before {
+        .site-credits > * + *::before {
             content: "";
             margin-right: 0;
         }
