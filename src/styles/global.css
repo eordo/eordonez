@@ -8,8 +8,7 @@
     --color-accent: #1d4ed8;
     /* Layout */
     --margin-width: 12rem;
-    --max-width-content: 48rem;
-    --max-width-prose: 72ch;
+    --max-width-content: 72ch;
     --max-width-layout: calc(var(--max-width-content) + 2 * var(--margin-width));
     /* Typography */
     --font-size: 20px;
@@ -91,10 +90,6 @@ main {
 
 .content-width {
     width: min(100% - var(--space-md), var(--max-width-content));
-}
-
-.reading-width {
-    max-width: var(--max-width-prose);
 }
 
 section + section {
