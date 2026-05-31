@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import PageHeader from "@/components/PageHeader.astro";
+import { Image } from "astro:assets";
 
+import yangmingshan from "@/images/yangmingshan.jpg";
 import updates from "@/data/updates.yaml";
 
 interface Update {
@@ -27,11 +28,25 @@ const pageTitle = "Home";
 ---
 
 <BaseLayout title={pageTitle}>
-	<PageHeader
-		title="Ahoy-hoy!"
-		description="I'm a master's student in data science with a background in economics, statistics, and Simpsons references."
-	/>
-	<section>
+	<section id="introduction">
+		<p class="intro">
+			<span>I'm Eric Ordoñez.</span>
+			<span>Ako si Eric Ordoñez.</span>
+			<span>Me llamo Eric Ordoñez.</span>
+			<span>Moi, c'est Eric Ordoñez.</span>
+			<span>Nama saya Eric Ordoñez.</span>
+		</p>
+		<p class="blurb">
+			Graduate student in data science.
+			Specializes in economics, statistics, and Simpsons references.
+			Currently based in Toronto.
+		</p>
+		<Image
+			src={yangmingshan}
+			alt="Me at Yangmingshan National Park, Taipei."
+		/>
+	</section>
+	<section id="updates">
 		<h2>Updates</h2>
 		<ul class="updates-list">
 			{latestUpdates.map((update) => (
@@ -53,6 +68,81 @@ const pageTitle = "Home";
 </BaseLayout>
 
 <style>
+	.intro {
+		position: relative;
+		overflow: hidden;
+		height: var(--space-8);
+		margin: 0;
+		line-height: 1.08;
+		font-size: var(--step-3);
+		font-weight: 650;
+		letter-spacing: -0.022em;
+	}
+
+	.intro span {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		transform: translateY(100%);
+		animation: intro-swipe 25s infinite both;
+	}
+
+	.intro:hover span {
+		animation-play-state: paused;
+	}
+
+	.intro span:nth-child(1) { animation-delay: 0s; }
+	.intro span:nth-child(2) { animation-delay: 5s; }
+	.intro span:nth-child(3) { animation-delay: 10s; }
+	.intro span:nth-child(4) { animation-delay: 15s; }
+	.intro span:nth-child(5) { animation-delay: 20s; }
+
+	@keyframes intro-swipe {
+		/* start below */
+		0% {
+			transform: translateY(100%);
+			opacity: 0;
+		}
+		/* slide into place */
+		4% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+		/* remain visible */
+		16% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+		/* slide downward */
+		20% {
+			transform: translateY(100%);
+			opacity: 0;
+		}
+		100% {
+			transform: translateY(100%);
+			opacity: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.intro span {
+			animation: none;
+			opacity: 0;
+			transform: none;
+		}
+
+		.intro span:first-child {
+			opacity: 1;
+		}
+	}
+
+	.blurb {
+		margin-top: var(--space-2);
+		line-height: 1.5;
+		font-size: var(--step-1);
+		letter-spacing: -0.015em;
+	}
+
 	.updates-list {
 		list-style: none;
 		margin: 0;
