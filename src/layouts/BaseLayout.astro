@@ -6,6 +6,8 @@ import SiteFooter from "@/components/SiteFooter.astro";
 import SiteMargin from "@/components/SiteMargin.astro";
 
 const { title } = Astro.props;
+const hasLeftMargin = Astro.slots.has("left-margin");
+const hasRightMargin = Astro.slots.has("right-margin");
 ---
 
 <!doctype html>
@@ -24,17 +26,27 @@ const { title } = Astro.props;
         <title>{title} | Eric Ordoñez</title>
     </head>
     <body>
-        <div class="container">
+        <div
+            class:list={[
+                "container",
+                hasLeftMargin && "has-left",
+                hasRightMargin && "has-right"
+            ]}
+        >
             <SiteHeader />
-            <SiteMargin side="left">
-                <slot name="left-margin" />
-            </SiteMargin>
+            {(hasLeftMargin &&
+                <SiteMargin side="left">
+                    <slot name="left-margin" />
+                </SiteMargin>
+            )}
             <main class="content-width">
                 <slot />
             </main>
-            <SiteMargin side="right">
-                <slot name="right-margin" />
-            </SiteMargin>
+            {(hasRightMargin &&
+                <SiteMargin side="right">
+                    <slot name="right-margin" />
+                </SiteMargin>
+            )}
             <SiteFooter />
         </div>
     </body>

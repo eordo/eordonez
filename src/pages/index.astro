@@ -29,13 +29,13 @@ const pageTitle = "Home";
 
 <BaseLayout title={pageTitle}>
 	<section id="introduction">
-		<p class="intro">
-			<span>I'm Eric Ordoñez.</span>
-			<span>Ako si Eric Ordoñez.</span>
-			<span>Me llamo Eric Ordoñez.</span>
-			<span>Moi, c'est Eric Ordoñez.</span>
-			<span>Nama saya Eric Ordoñez.</span>
-		</p>
+		<div class="intro">
+			<span>Hi! I'm Eric Ordoñez.</span>
+			<span>Kumusta! Ako si Eric Ordoñez.</span>
+			<span>¡Hola! Me llamo Eric Ordoñez.</span>
+			<span>Bonjour! Moi, c'est Eric Ordoñez.</span>
+			<span>Halo! Nama saya Eric Ordoñez.</span>
+		</div>
 		<p class="blurb">
 			Graduate student in data science.
 			Specializes in economics, statistics, and Simpsons references.
@@ -43,7 +43,8 @@ const pageTitle = "Home";
 		</p>
 		<Image
 			src={yangmingshan}
-			alt="Me at Yangmingshan National Park, Taipei."
+			alt="Eric in front of cherry blossoms."
+			title="Me at Yangmingshan National Park, Taipei."
 		/>
 	</section>
 	<section id="updates">
@@ -163,7 +164,11 @@ const pageTitle = "Home";
 		white-space: nowrap;
 	}
 
-	@media (max-width: 40rem) {
+	@media (max-width: 30rem) {
+		.intro {
+			height: calc(2 * var(--space-8));
+		}
+
 		.update-item {
 			grid-template-columns: 1fr;
 			gap: 0;

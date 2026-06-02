@@ -9,7 +9,7 @@ const siteLinks = [
 ---
 
 <header class="site-header">
-    <div class="site-header-inner content-width">
+    <div class="site-header-inner">
         <a href="/" class="site-title">
             <Logo />
         </a>
@@ -64,5 +64,16 @@ const siteLinks = [
 
     .site-nav a:hover {
         color: var(--color-accent);
+    }
+
+    @media (max-width: 30rem) {
+        .site-header {
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .site-header-inner {
+            flex-direction: column;
+            gap: var(--space-4);
+        }
     }
 </style>

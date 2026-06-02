@@ -8,8 +8,13 @@
     --color-accent: #1d4ed8;
     /* Layout */
     --margin-width: 12rem;
-    --max-width-content: 72ch;
+    --max-width-content: 65ch;
     --max-width-layout: calc(var(--max-width-content) + 2 * var(--margin-width));
+    /* Breakpoints */
+    --bp-xs: 24rem: /* 384px at 16px */
+    --bp-sm: 30rem; /* 480px at 16px */
+    --bp-md: 48rem; /* 768px at 16px */
+    --bp-lg: 72rem; /* 1152px at 16px */
     /* Typography */
     --font-size: 16px;
     --font-size-mobile: 16px;
@@ -68,6 +73,7 @@ body {
 main {
     grid-area: main;
     min-width: 0;
+    padding-block: var(--space-4);
 }
 
 .container {
@@ -238,13 +244,67 @@ pre code {
     font-size: 0.9em;
 }
 
-@media (max-width: 640px) {
-    html {
-        font-size: var(--font-size-mobile);
+@media (max-width: 48rem) {
+    :root {
+        --max-width-content: var(--bp-md);
     }
 
     .container {
-        padding-block: var(--space-6);
+        padding: var(--space-4);
+    }
+
+    .container:not(.has-left):not(.has-right) {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows:
+            auto
+            1fr
+            auto;
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+        gap: var(--space-3);
+    }
+
+    .container.has-left:not(.has-right) {
+        grid-template-rows:
+            auto
+            auto
+            1fr
+            auto;
+        grid-template-areas:
+            "header"
+            "left"
+            "main"
+            "footer";
+    }
+
+    .container.has-right:not(.has-left) {
+        grid-template-rows:
+            auto
+            1fr
+            auto
+            auto;
+        grid-template-areas:
+            "header"
+            "main"
+            "right"
+            "footer";
+    }
+
+    .container.has-left.has-right {
+        grid-template-rows:
+            auto
+            auto
+            1fr
+            auto
+            auto;
+        grid-template-areas:
+            "header"
+            "left"
+            "main"
+            "right"
+            "footer";
     }
 
     h1 {
@@ -253,5 +313,15 @@ pre code {
 
     h2 {
         font-size: var(--step-2);
+    }
+}
+
+@media (max-width: 30rem) {
+    html {
+        font-size: var(--font-size-mobile);
+    }
+
+    .container {
+        padding: var(--space-2);
     }
 }
