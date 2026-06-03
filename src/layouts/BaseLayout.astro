@@ -39,7 +39,7 @@ const hasRightMargin = Astro.slots.has("right-margin");
                     <slot name="left-margin" />
                 </SiteMargin>
             )}
-            <main class="content-width">
+            <main>
                 <slot />
             </main>
             {(hasRightMargin &&

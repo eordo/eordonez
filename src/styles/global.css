@@ -96,10 +96,6 @@ main {
     margin-inline: auto;
 }
 
-.content-width {
-    width: min(100% - var(--space-6), var(--max-width-content));
-}
-
 section + section {
     margin-top: clamp(var(--space-6), 8vw, calc(2 * var(--space-8)));
 }
