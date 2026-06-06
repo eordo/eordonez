@@ -9,21 +9,44 @@ const posts = await getCollection("work")
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const pageTitle = "Work";
+const pageSubtitle = "Projects, research, and other things.";
 ---
 
 <BaseLayout title={pageTitle}>
 	<PageHeader
 		title={pageTitle}
-		description="Projects, research, and other things."	
+		subtitle={pageSubtitle}
 	/>
-	{
-		posts.map((post) => (
-			<ContentCard
-				href={`/work/${post.id}`}
-				title={post.data.title}
-				description={post.data.description}
-				date={post.data.pubDate.toLocaleDateString()}
-			/>
-		))
-	}
+	<section>
+		<ul class="work-list">
+			{
+				posts.map((post) => (
+					<li><ContentCard
+						href={`/work/${post.id}`}
+						title={post.data.title}
+						description={post.data.description}
+						primaryTag={post.data.primaryTag}
+						date={post.data.pubDate.toLocaleDateString()}
+					/></li>
+				))
+			}
+		</ul>
+	</section>
 </BaseLayout>
+
+<style>
+	.work-list {
+		list-style-type: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.work-list li {
+		padding: var(--space-1) 0;
+		margin-top: 0;
+	}
+
+	.work-list li:not(:first-child) {
+		border-top: 1px solid var(--color-border);
+	}
+</style>

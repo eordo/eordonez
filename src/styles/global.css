@@ -302,14 +302,6 @@ pre code {
             "right"
             "footer";
     }
-
-    h1 {
-        font-size: var(--step-3);
-    }
-
-    h2 {
-        font-size: var(--step-2);
-    }
 }
 
 @media (max-width: 30rem) {

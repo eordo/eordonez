@@ -19,6 +19,7 @@ const workCollection = defineCollection({
         description: z.string(),
         pubDate: z.date(),
         featured: z.boolean().default(false),
+        primaryTag: z.string(),
         tags: z.array(z.string()).default([])
     })
 });

@@ -1,21 +1,28 @@
 ---
-const { title, description } = Astro.props;
+const { title, subtitle = "" } = Astro.props;
 ---
 
 <header class="page-header">
-    <h1>{title}</h1>
-    {description && <p>{description}</p>}
+    <h1 class="page-title">{title}</h1>
+    {subtitle && <p class="page-subtitle">{subtitle}</p>}
 </header>
 
 <style>
     .page-header {
-        margin-bottom: var(--space-lg);
+        margin-bottom: var(--space-6);
     }
-    .page-header p {
+
+    .page-title {
+        padding-bottom: var(--space-2);
+        margin-bottom: 0;
+    }
+
+    .page-subtitle {
+        padding-bottom: var(--space-2);
+        margin: 0;
         font-size: var(--step-1);
-        font-family: var(--font-sans);
+        line-height: 1.5;
         letter-spacing: -0.015em;
-        color: var(--muted);
-        max-width: 60ch;
+        color: var(--color-muted);
     }
 </style>
