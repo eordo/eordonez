@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageHeader from "@/components/PageHeader.astro";
-import ContentCard from "@/components/ContentCard.astro";
 
 import { getCollection } from "astro:content";
+import { formatDate } from "@/utils/date";
 
 const posts = await getCollection("blog", ({ data }) => {
 	return data.draft !== true;
@@ -11,21 +11,51 @@ const posts = await getCollection("blog", ({ data }) => {
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const pageTitle = "Blog";
+const pageSubtitle = "Writings on economics, technology, and other things.";
 ---
 
 <BaseLayout title={pageTitle}>
 	<PageHeader 
 		title={pageTitle}
-		description="Writings on economics, data science, and related topics."
+		subtitle={pageSubtitle}
 	/>
-	{
-		posts.map((post) => (
-			<ContentCard
-				href={`/blog/${post.id}`}
-				title={post.data.title}
-				description={post.data.description}
-				date={post.data.pubDate.toLocaleDateString()}
-			/>
-		))
-	}
+	<ul class="posts-list">
+		{posts.map((post) => (
+			<li class="post-item">
+				<time datetime={post.data.pubDate.toLocaleDateString()}>
+					{formatDate(post.data.pubDate)}
+				</time>
+				<a href={`/blog/${post.id}`}>{post.data.title}</a>
+			</li>
+		))}
+	</ul>
 </BaseLayout>
+
+<style>
+	.posts-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.post-item {
+		display: grid;
+		grid-template-columns: calc(4 * var(--space-8)) 1fr;
+		gap: var(--space-3) var(--space-6);
+		align-items: start;
+		margin-bottom: var(--space-3);
+	}
+
+	.post-item time {
+		color: var(--color-muted);
+		font-weight: 500;
+		white-space: nowrap;
+	}
+
+	@media (max-width: 30rem) {
+		.post-item {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+	}
+</style>
