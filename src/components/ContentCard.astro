@@ -7,13 +7,15 @@ const {
     date,
     name = "work"
 } = Astro.props;
+
+import { formatYear } from "@/utils/date";
 ---
 
 <details name={name}>
     <summary>
         <div class="summary-content">
             <span class="title">{title}</span>
-            <span class="meta">{date} &mdash; {primaryTag}</span>
+            <span class="meta">{formatYear(date)} &mdash; {primaryTag}</span>
         </div>
     </summary>
     <div class="details-content">

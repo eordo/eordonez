@@ -5,6 +5,8 @@ import { Image } from "astro:assets";
 import yangmingshan from "@/images/yangmingshan.jpg";
 import updates from "@/data/updates.yaml";
 
+import { formatDate } from "@/utils/date";
+
 interface Update {
 	date: string;
 	text: string;
@@ -12,17 +14,6 @@ interface Update {
 }
 
 const latestUpdates: Update[] = updates.slice(0, 5);
-
-const formatter = new Intl.DateTimeFormat("en-US", {
-	month: "short",
-	day: "numeric",
-	year: "numeric"
-});
-
-function formatDate(dateString: string) {
-	const [year, month, day] = dateString.split("-").map(Number);
-	return formatter.format(new Date(year, month - 1, day));
-}
 
 const pageTitle = "Home";
 ---
@@ -74,7 +65,7 @@ const pageTitle = "Home";
 		overflow: hidden;
 		height: var(--space-8);
 		margin: 0;
-		line-height: 1.08;
+		line-height: 1.1;
 		font-size: var(--step-3);
 		font-weight: 650;
 		letter-spacing: -0.022em;
