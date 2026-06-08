@@ -91,6 +91,7 @@ main {
         "left main right"
         ". footer .";
     gap: var(--space-6);
+    column-gap: calc(3 * var(--space-4));
     min-height: 100vh;
     width: min(100% - var(--space-6), var(--max-width-layout));
     margin-inline: auto;
@@ -246,11 +247,11 @@ pre code {
     }
 
     .container {
+        grid-template-columns: minmax(0, 1fr);
         padding: var(--space-4);
     }
 
     .container:not(.has-left):not(.has-right) {
-        grid-template-columns: minmax(0, 1fr);
         grid-template-rows:
             auto
             1fr

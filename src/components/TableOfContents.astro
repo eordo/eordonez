@@ -1,0 +1,92 @@
+---
+interface Heading {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
+const { headings } = Astro.props;
+---
+
+<nav class="toc">
+    <span class="toc-title">Table of contents</span>
+    <ol>
+        {headings.map((heading: Heading) => (
+            <li class={`depth-${heading.depth}`}>
+                <a href={`#${heading.slug}`}>
+                    {heading.text}
+                </a>
+            </li>
+        ))}
+    </ol>
+</nav>
+
+<style>
+    .toc {
+        position: sticky;
+        top: var(--space-8);
+        font-size: var(--step--1);
+    }
+
+    .toc .toc-title {
+        color: var(--color-text);
+        font-weight: 600;
+    }
+
+    .toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc li {
+        margin-block: var(--space-1);
+    }
+
+    .toc .depth-3 {
+        padding-left: var(--space-4);
+    }
+
+    .toc a {
+        color: var(--color-muted);
+        text-decoration: none;
+        transition: color 150ms;
+    }
+
+    .toc a:hover {
+        color: var(--color-text);
+    }
+
+    .toc a.active {
+        color: var(--color-text);
+        font-weight: 600;
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                const link = document.querySelector(
+                    `.toc a[href="#${entry.target.id}"]`
+                );
+
+
+                if (entry.isIntersecting) {
+                    document
+                        .querySelectorAll(".toc a")
+                        .forEach(a => a.classList.remove("active"));
+                    
+                        link?.classList.add("active")
+                }
+            });
+        },
+        {
+            rootMargin: "0px 0px -70% 0px"
+        }
+    );
+
+    document
+        .querySelectorAll("h2, h3")
+        .forEach(h => observer.observe(h));
+</script>

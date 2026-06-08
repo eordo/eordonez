@@ -6,13 +6,17 @@ interface Props {
 const { side } = Astro.props;
 ---
 
-<aside class={`site-margin site-margin-${side}`}>
+<aside class={`site-margin-${side}`}>
     <slot />
 </aside>
 
 <style>
     .site-margin-left {
         grid-area: left;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-8);
+        padding: var(--space-4) 0;
     }
 
     .site-margin-right {
