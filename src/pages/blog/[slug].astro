@@ -19,14 +19,12 @@ const toc = headings.filter(h => h.depth <= 3);
 ---
 
 <BaseLayout title={post.data.title}>
-    <Fragment slot="left-margin">
+    <PageHeader 
+        title={post.data.title}
+        subtitle={post.data.description}
+        />
+    <Content />
+    <Fragment slot="sidebar">
         <TableOfContents headings={toc} />
     </Fragment>
-    <article>
-        <PageHeader 
-            title={post.data.title}
-            subtitle={post.data.description}
-        />
-        <Content />
-    </article>
 </BaseLayout>

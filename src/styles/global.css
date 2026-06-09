@@ -6,21 +6,14 @@
     --color-muted: #666;
     --color-border: #ddd;
     --color-accent: #1d4ed8;
-    /* Layout */
-    --margin-width: 12rem;
-    --max-width-content: 65ch;
-    --max-width-layout: calc(var(--max-width-content) + 2 * var(--margin-width));
-    /* Breakpoints */
-    --bp-xs: 24rem: /* 384px at 16px */
-    --bp-sm: 30rem; /* 480px at 16px */
-    --bp-md: 48rem; /* 768px at 16px */
-    --bp-lg: 72rem; /* 1152px at 16px */
+
     /* Typography */
     --font-size: 16px;
     --font-size-mobile: 16px;
     --font-serif: "STIX Two Text", Georgia, serif;
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --font-mono: "JetBrains Mono", monospace;
+    
     /* Sizing */
     --step--1: 0.833rem;
     --step-0: 1rem;
@@ -29,6 +22,7 @@
     --step-3: 1.728rem;
     --step-4: 2.074rem;
     --step-5: 2.488rem;
+    
     /* Spacing */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
@@ -37,6 +31,19 @@
     --space-5: 1.25rem;
     --space-6: 1.5rem;
     --space-8: 2rem;
+    
+    /* Layout */
+    --column-gap: calc(3 * var(--space-4));
+    --row-gap: var(--space-6);
+    --min-width-margin: 8rem;
+    --max-width-margin: 12rem;
+    --max-width-content: 34rem;
+    --max-width-layout: 
+        calc(
+            var(--max-width-content)
+            + 2 * var(--max-width-margin)
+            + 2 * var(--column-gap)
+        );
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,29 +79,50 @@ body {
 
 main {
     grid-area: main;
-    min-width: 0;
-    padding-block: var(--space-4);
 }
 
 .container {
     display: grid;
     grid-template-columns:
-        minmax(0, var(--margin-width))
+        minmax(var(--min-width-margin), var(--max-width-margin))
         minmax(0, var(--max-width-content))
-        minmax(0, var(--margin-width));
+        minmax(var(--min-width-margin), var(--max-width-margin));
     grid-template-rows:
         auto
         1fr
         auto;
     grid-template-areas:
         ". header ."
-        "left main right"
+        "sidebar main main"
         ". footer .";
-    gap: var(--space-6);
-    column-gap: calc(3 * var(--space-4));
+    column-gap: var(--column-gap);
+    row-gap: var(--row-gap);
+    min-width: 0;
     min-height: 100vh;
-    width: min(100% - var(--space-6), var(--max-width-layout));
+    width: min(100% - 2 * var(--space-6), var(--max-width-layout));
     margin-inline: auto;
+    padding-block: var(--space-4);
+    justify-content: center;
+}
+
+.content {
+    grid-area: main;
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        var(--max-width-margin);
+    column-gap: var(--column-gap);
+    align-content: start;
+}
+
+.content > * {
+    grid-column: 1;
+}
+
+.content .sidenote {
+    grid-column: 2;
+    font-size: var(--step--1);
+    color: var(--color-muted);
 }
 
 section + section {
@@ -242,66 +270,38 @@ pre code {
 }
 
 @media (max-width: 48rem) {
-    :root {
-        --max-width-content: var(--bp-md);
-    }
-
     .container {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+        gap: var(--space-4);
         padding: var(--space-4);
     }
 
-    .container:not(.has-left):not(.has-right) {
-        grid-template-rows:
-            auto
-            1fr
-            auto;
+    .container.has-sidebar {
         grid-template-areas:
             "header"
-            "main"
-            "footer";
-        gap: var(--space-3);
-    }
-
-    .container.has-left:not(.has-right) {
-        grid-template-rows:
-            auto
-            auto
-            1fr
-            auto;
-        grid-template-areas:
-            "header"
-            "left"
+            "sidebar"
             "main"
             "footer";
     }
 
-    .container.has-right:not(.has-left) {
-        grid-template-rows:
-            auto
-            1fr
-            auto
-            auto;
+    .container:not(.has-sidebar) {
         grid-template-areas:
             "header"
             "main"
-            "right"
             "footer";
     }
 
-    .container.has-left.has-right {
-        grid-template-rows:
-            auto
-            auto
-            1fr
-            auto
-            auto;
-        grid-template-areas:
-            "header"
-            "left"
-            "main"
-            "right"
-            "footer";
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .content .sidenote {
+        grid-column: 1;
     }
 }
 

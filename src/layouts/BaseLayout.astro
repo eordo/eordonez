@@ -3,11 +3,10 @@ import "@/styles/global.css";
 
 import SiteHeader from "@/components/SiteHeader.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
-import SiteMargin from "@/components/SiteMargin.astro";
+import SiteSidebar from "@/components/SiteSidebar.astro";
 
-const { title } = Astro.props;
-const hasLeftMargin = Astro.slots.has("left-margin");
-const hasRightMargin = Astro.slots.has("right-margin");
+const { title = "" } = Astro.props;
+const hasSidebar = Astro.slots.has("sidebar");
 ---
 
 <!doctype html>
@@ -23,30 +22,21 @@ const hasRightMargin = Astro.slots.has("right-margin");
         />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-        <title>{title} | Eric Ordoñez</title>
+        <title>{title ? `${title} | Eric Ordoñez` : "Eric Ordoñez"}</title>
     </head>
     <body>
-        <div
-            class:list={[
-                "container",
-                hasLeftMargin && "has-left",
-                hasRightMargin && "has-right"
-            ]}
-        >
+        <div class:list={["container", hasSidebar && "has-sidebar"]}>
             <SiteHeader />
-            {(hasLeftMargin &&
-                <SiteMargin side="left">
-                    <slot name="left-margin" />
-                </SiteMargin>
+            {(hasSidebar &&
+                <SiteSidebar>
+                    <slot name="sidebar" />
+                </SiteSidebar>
             )}
             <main>
-                <slot />
-            </main>
-            {(hasRightMargin &&
-                <SiteMargin side="right">
-                    <slot name="right-margin" />
-                </SiteMargin>
-            )}
+                <article class="content">
+                    <slot />
+                </article>
+            </main >
             <SiteFooter />
         </div>
     </body>

@@ -1,0 +1,13 @@
+<aside class="site-sidebar">
+    <slot />
+</aside>
+
+<style>
+    .site-sidebar {
+        grid-area: sidebar;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-8);
+        padding: var(--space-4) 0;
+    }
+</style>
