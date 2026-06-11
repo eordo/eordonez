@@ -115,14 +115,12 @@ main {
     align-content: start;
 }
 
-.content > * {
+.content > :not(.sidenote) {
     grid-column: 1;
 }
 
-.content .sidenote {
+.content > .sidenote {
     grid-column: 2;
-    font-size: var(--step--1);
-    color: var(--color-muted);
 }
 
 section + section {
