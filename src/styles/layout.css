@@ -1,0 +1,30 @@
+/* Base container */
+.container {
+    width: min(var(--max-layout-width), 100%);
+    padding: var(--space-6);
+    margin-inline: auto;
+}
+
+/* Grid layouts for standalone pages */
+.grid {
+    display: grid;
+    column-gap: calc(3 * var(--space-4));
+}
+
+.grid.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid .col-span-2 {
+    grid-column: span 2;
+}
+
+.grid .col-span-3 {
+    grid-column: span 3;
+}
+
+@media (max-width: 48rem) {
+    .grid.cols-3 {
+        grid-template-columns: 1fr;
+    }
+}
