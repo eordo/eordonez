@@ -9,71 +9,86 @@ const siteLinks = [
 ---
 
 <header class="site-header">
-    <div class="site-header-inner">
-        <a href="/" class="site-title">
+    <nav class="site-navbar">
+        <a href="/" aria-label="Home" class="site-logo">
             <Logo />
         </a>
-        <nav class="site-nav">
+        <ul class="site-links">
             {siteLinks.map((siteLink) => (
-                <a href={siteLink.href}>{siteLink.label}</a>
+                <li>
+                    <a href={siteLink.href} aria-label={siteLink.label}>
+                        {siteLink.label}
+                    </a>
+                </li>
             ))}
-        </nav>
-    </div>
+        </ul>
+    </nav>
 </header>
 
 <style>
     .site-header {
-        grid-area: header;
+        width: 100vw;
     }
 
-    .site-header-inner {
-        padding: var(--space-4) 0;
+    .site-navbar {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        width: min(var(--max-layout-width), 100vw);
+        padding: var(--space-6);
+        margin-inline: auto;
     }
 
-    .site-title {
+    .site-logo {
         color: var(--color-text);
         transition: color 120ms ease;
     }
 
-    .site-title:hover {
+    .site-logo:hover {
         color: var(--color-accent);
     }
 
-    .site-title :global(svg) {
+    .site-logo :global(svg) {
         display: block;
-        height: var(--space-8);
         width: auto;
+        height: var(--space-8);
     }
 
-    .site-nav {
+    .site-links {
         display: flex;
-        gap: var(--space-8);
-        font-family: var(--font-mono);
-        font-size: var(--step-0);
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .site-links li + li {
+        margin-top: 0;
     }
 
-    .site-nav a {
+    .site-links li + li::before {
+        content: "/";
+        margin: 0 var(--space-3);
+    }
+
+    .site-links a {
         color: var(--color-muted);
         text-decoration: none;
+        text-transform: uppercase;
         transition: color 120ms ease;
         font-weight: 500;
+        font-size: var(--step-0);
+        font-family: var(--font-mono);
     }
 
-    .site-nav a:hover {
+    .site-links a:hover {
         color: var(--color-accent);
     }
 
     @media (max-width: 30rem) {
-        .site-header {
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .site-header-inner {
+        .site-navbar {
             flex-direction: column;
-            gap: var(--space-4);
+            gap: var(--space-6);
         }
     }
 </style>
