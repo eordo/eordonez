@@ -1,0 +1,38 @@
+<div class="hero-banner">
+    <div class="container">
+        <h1>Eric Ordoñez</h1>
+        <ul>
+            <li>Data scientist, economist, and occasional pub trivia winner.</li>
+            <li>Master's student in data science and artifical intelligence.</li>
+            <li>Currently based in <span title="Technically the GTA">Toronto</span>.</li>
+        </ul>
+    </div>
+</div>
+
+<style>
+    .hero-banner {
+        background-color: color-mix(in srgb, var(--color-border) 50%, transparent);
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin: 0;
+        font-size: var(--step-1);
+    }
+
+    @media (max-width: 30rem) {
+        li {
+            margin-bottom: var(--space-2);
+        }
+    }
+</style>
