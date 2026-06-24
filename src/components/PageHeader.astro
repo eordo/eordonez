@@ -1,8 +1,18 @@
 ---
-const { title, subtitle = "" } = Astro.props;
+const {
+    title,
+    subtitle,
+    contentType = null,
+    primaryTag = null,
+} = Astro.props;
 ---
 
 <header class="page-header">
+    <div class="page-header-meta">
+        {contentType && <a href={`/${contentType}`}>{contentType}</a>}
+        {contentType && primaryTag && <span>/</span>}
+        {primaryTag && <span>{primaryTag}</span>}
+    </div>
     <h1 class="page-title">{title}</h1>
     {subtitle && <p class="page-subtitle">{subtitle}</p>}
 </header>
@@ -10,6 +20,24 @@ const { title, subtitle = "" } = Astro.props;
 <style>
     .page-header {
         margin-bottom: var(--space-6);
+    }
+
+    .page-header-meta {
+        display: flex;
+        gap: var(--space-2);
+        font-weight: 500;
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        color: var(--color-muted);
+    }
+
+    .page-header-meta a {
+        text-decoration: none;
+        color: var(--color-muted);
+    }
+
+    .page-header-meta a:hover {
+        color: var(--color-accent);
     }
 
     .page-title {
