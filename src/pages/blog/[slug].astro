@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageHeader from "@/components/PageHeader.astro";
-import TableOfContents from "@/components/TableOfContents.astro";
 
 import { getCollection, render } from "astro:content";
 
@@ -14,17 +13,14 @@ export async function getStaticPaths() {
 }
 
 const post = Astro.props;
-const { Content, headings } = await render(post);
-const toc = headings.filter(h => h.depth <= 3);
+const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
     <PageHeader 
         title={post.data.title}
         subtitle={post.data.description}
-        />
+        contentType="blog"
+    />
     <Content />
-    <Fragment slot="sidebar">
-        <TableOfContents headings={toc} />
-    </Fragment>
 </BaseLayout>
