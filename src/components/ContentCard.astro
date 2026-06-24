@@ -5,84 +5,57 @@ const {
     description,
     primaryTag,
     date,
-    name = "work"
 } = Astro.props;
 
 import { formatYear } from "@/utils/date";
 ---
 
-<details name={name}>
-    <summary>
-        <div class="summary-content">
-            <span class="title">{title}</span>
-            <span class="meta">{formatYear(date)} &mdash; {primaryTag}</span>
-        </div>
-    </summary>
-    <div class="details-content">
-        <p class="description">{description}</p>
-        <a href={href} class="link">Read more...</a>
+<a href={href}>
+    <div class="content-card">
+        <span class="card-title">{title}</span>
+        <span class="card-description">{description}</span>
+        <span class="card-meta">{primaryTag} &mdash; {formatYear(date)}</span>
     </div>
-</details>
+</a>
 
 <style>
-    details summary {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        list-style: none;        
-        cursor: pointer;
+    a {
+        color: var(--color-text);
+        text-decoration: none;
     }
 
-    details summary::-webkit-details-marker {
-        display: none;
-    }
-
-    details summary::after {
-        content: "⌄";
-        font-size: var(--step-2);
-        transition: transform 120ms;
-    }
-
-    details[open] summary::after {
-        transform: rotate(180deg);
-    }
-    
-    details:hover summary .summary-content .title {
-        font-weight: 650;
-        transition: font-weight 120ms ease;
-    }
-    
-    details[open] summary .summary-content .title {
-        font-weight: 650;
-    }
-
-    .summary-content {
+    .content-card {
         display: flex;
         flex-direction: column;
-        padding: var(--space-1) 0;
+        gap: var(--space-2);
+        padding: var(--space-4);
+        border: solid 2px var(--color-text);
+        border-left: solid 6px var(--color-text);
+        border-bottom: solid 4px var(--color-text);
+        transition: transform 120ms ease;
     }
 
-    .summary-content .meta {
+    a:hover .content-card {
+        border-color: var(--color-accent);
+        transform: translate(2px, -4px);
+    }
+
+    .card-title {
+        line-height: 1.4;
+        letter-spacing: -0.015em;
+        font-size: var(--step-0);
+        font-weight: 500;
+    }
+
+    .card-description {
+        font-size: var(--step--1);
+    }
+
+    .card-meta {
         color: var(--color-muted);
-    }
-
-    details::details-content {
-        opacity: 0;
-        transform: translateY(-var(--space-2));
-        transition: opacity 200ms ease, transform 200ms ease;
-    }
-
-    details[open]::details-content {
-        opacity: 1;
-        transform: translateY(0);
-        padding: var(--space-1) 0;
-    }
-
-    .details-content .description {
-        margin: 0;
-    }
-
-    .details-content .link {
-        margin: 0;
+        font-family: var(--font-mono);
+        font-size: var(--step--1);
+        text-transform: uppercase;
+        white-space: nowrap;
     }
 </style>
