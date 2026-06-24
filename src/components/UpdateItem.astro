@@ -1,0 +1,28 @@
+---
+import { formatDate } from "@/utils/date";
+
+const { date, text, url = null } = Astro.props;
+---
+
+<li>
+    <time datetime={date}>{formatDate(date)}</time>
+    <span>{url ? <a href={url}>text</a> : text}</span>
+</li>
+
+<style>
+    li {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        align-items: start;
+        margin-bottom: var(--space-3);
+    }
+
+    li time {
+        color: var(--color-muted);
+        font-family: var(--font-mono);
+        font-size: var(--step--1);
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+</style>
