@@ -1,11 +1,16 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
+import ContentCard from "@/components/ContentCard.astro";
+import UpdateItem from "@/components/UpdateItem.astro";
 
-import yangmingshan from "@/images/yangmingshan.jpg";
 import updates from "@/data/updates.yaml";
 
-import { formatDate } from "@/utils/date";
+import { getCollection } from "astro:content";
+
+const featuredWork = await getCollection("work", ({ data }) => {
+	return data.featured === true;
+})
+featuredWork.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 interface Update {
 	date: string;
@@ -17,150 +22,60 @@ const latestUpdates: Update[] = updates.slice(0, 5);
 ---
 
 <BaseLayout>
-	<section id="introduction">
-		<div class="intro">
-			<span>Hi! I'm Eric Ordoñez.</span>
-			<span>Kumusta! Ako si Eric Ordoñez.</span>
-			<span>¡Hola! Me llamo Eric Ordoñez.</span>
-			<span>Bonjour! Moi, c'est Eric Ordoñez.</span>
-			<span>Halo! Nama saya Eric Ordoñez.</span>
-		</div>
-		<p class="blurb">
-			Graduate student in data science.
-			Specializes in economics, statistics, and Simpsons references.
-			Currently based in Toronto.
-		</p>
-		<Image
-			src={yangmingshan}
-			alt="Eric in front of cherry blossoms."
-			title="Me at Yangmingshan National Park, Taipei."
-		/>
-	</section>
-	<section id="updates">
-		<h2>Updates</h2>
-		<ul class="updates-list">
-			{latestUpdates.map((update) => (
-				<li class="update-item">
-					<time datetime={update.date}>
-						{formatDate(update.date)}
-					</time>
-					<span>
-						{update.url ? (
-							<a href={update.url}>{update.text}</a>
-						) : (
-							update.text
-						)}
-					</span>
-				</li>
-			))}
-		</ul>
-	</section>
+	<div class="grid cols-3">
+		<section id="featured-work" class="col-span-2">
+			<h2>Featured work</h2>
+			<ul class="content-card-grid">
+				{featuredWork.map((item) => (<li>
+					<ContentCard
+						href={`/work/${item.id}`}
+						title={item.data.title}
+						description={item.data.description}
+						primaryTag={item.data.primaryTag}
+						date={item.data.pubDate}
+					/>
+				</li>))}
+			</ul>
+		</section>
+		<section id="updates">
+			<h2>Updates</h2>
+			<ul class="updates-list">
+				{latestUpdates.map((update) => (
+					<UpdateItem
+						date={update.date}
+						text={update.text}
+						url={update.url}
+					/>
+				))}
+			</ul>
+		</section>
+	</div>
 </BaseLayout>
 
 <style>
-	.intro {
-		position: relative;
-		overflow: hidden;
-		height: var(--space-8);
-		margin: 0;
-		line-height: 1.1;
-		font-size: var(--step-3);
-		font-weight: 650;
-		letter-spacing: -0.022em;
+	.content-card-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-3);
+		list-style-type: none;
+		margin-left: 0;
+		padding-left: 0;
 	}
 
-	.intro span {
-		position: absolute;
-		inset: 0;
-		opacity: 0;
-		transform: translateY(100%);
-		animation: intro-swipe 25s infinite both;
-	}
-
-	.intro:hover span {
-		animation-play-state: paused;
-	}
-
-	.intro span:nth-child(1) { animation-delay: 0s; }
-	.intro span:nth-child(2) { animation-delay: 5s; }
-	.intro span:nth-child(3) { animation-delay: 10s; }
-	.intro span:nth-child(4) { animation-delay: 15s; }
-	.intro span:nth-child(5) { animation-delay: 20s; }
-
-	@keyframes intro-swipe {
-		/* start below */
-		0% {
-			transform: translateY(100%);
-			opacity: 0;
-		}
-		/* slide into place */
-		4% {
-			transform: translateY(0);
-			opacity: 1;
-		}
-		/* remain visible */
-		16% {
-			transform: translateY(0);
-			opacity: 1;
-		}
-		/* slide downward */
-		20% {
-			transform: translateY(100%);
-			opacity: 0;
-		}
-		100% {
-			transform: translateY(100%);
-			opacity: 0;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.intro span {
-			animation: none;
-			opacity: 0;
-			transform: none;
-		}
-
-		.intro span:first-child {
-			opacity: 1;
-		}
-	}
-
-	.blurb {
-		margin-top: var(--space-2);
-		line-height: 1.5;
-		font-size: var(--step-1);
-		letter-spacing: -0.015em;
+	.content-card-grid li {
+		padding: 0;
+		margin-top: 0;
 	}
 
 	.updates-list {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-	}
+	} */
 
-	.update-item {
-		display: grid;
-		grid-template-columns: calc(4 * var(--space-8)) 1fr;
-		gap: var(--space-3) var(--space-6);
-		align-items: start;
-		margin-bottom: var(--space-3);
-	}
-
-	.update-item time {
-		color: var(--color-muted);
-		font-weight: 500;
-		white-space: nowrap;
-	}
-
-	@media (max-width: 30rem) {
-		.intro {
-			height: calc(2 * var(--space-8));
-		}
-
-		.update-item {
+	@media (max-width: 48rem) {
+		.content-card-grid {
 			grid-template-columns: 1fr;
-			gap: 0;
 		}
 	}
 </style>

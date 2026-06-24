@@ -1,0 +1,210 @@
+:root {
+    color-scheme: light dark;
+    /* Colors */
+    --color-bg: #f8f7f4;
+    --color-text: #1f1f1f;
+    --color-muted: #666;
+    --color-border: #ddd;
+    --color-accent: #1d4ed8;
+
+    /* Typography */
+    --font-size: 20px;
+    --font-size-mobile: 16px;
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-serif: "STIX Two Text", Georgia, serif;
+    --font-mono: "JetBrains Mono", monospace;
+    
+    /* Sizing */
+    --type-ratio: 1.25;
+    --step--1: calc(pow(var(--type-ratio), -1) * 1rem); /* 0.8  rem */
+    --step-0: 1rem;                                     /* 1    rem */
+    --step-1: calc(var(--type-ratio) * 1rem);           /* 1.25 rem */
+    --step-2: calc(pow(var(--type-ratio), 2) * 1rem);   /* 1.56 rem */
+    --step-3: calc(pow(var(--type-ratio), 3) * 1rem);   /* 1.95 rem */
+    --step-4: calc(pow(var(--type-ratio), 4) * 1rem);   /* 2.44 rem */
+    --step-5: calc(pow(var(--type-ratio), 5) * 1rem);   /* 3.05 rem */
+
+    /* Spacing */
+    --space-unit: 0.25rem;
+    --space-1: var(--space-unit);           /* 0.25 rem */
+    --space-2: calc(2 * var(--space-unit)); /* 0.5  rem */
+    --space-3: calc(3 * var(--space-unit)); /* 0.75 rem */
+    --space-4: calc(4 * var(--space-unit)); /* 1    rem */
+    --space-5: calc(5 * var(--space-unit)); /* 1.25 rem */
+    --space-6: calc(6 * var(--space-unit)); /* 1.5  rem */
+    --space-7: calc(7 * var(--space-unit)); /* 1.75 rem */
+    --space-8: calc(8 * var(--space-unit)); /* 2    rem */
+    
+    /* Layout */
+    --max-layout-width: 1200px;
+    --content-width: 40rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #111111;
+        --color-text: #e8e6e3;
+        --color-muted: #a1a1aa;
+        --color-border: #2a2a2a;
+        --color-accent: #60a5fa;
+    }
+}
+
+html {
+    font-size: var(--font-size);
+    scrollbar-gutter: stable;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--step-0);
+    line-height: 1.618;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+    flex-grow: 1;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+}
+
+a:hover {
+    text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin-bottom: var(--space-4);
+    font-family: var(--font-sans);
+    line-height: 1.1;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: var(--step-5);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+}
+
+h2 {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+    font-size: var(--step-4);
+    font-weight: 650;
+    letter-spacing: -0.022em;
+}
+
+h3 {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-4);
+    font-size: var(--step-3);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+}
+
+h4 {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+    font-size: var(--step-2);
+    font-weight: 600;
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre,
+table {
+    margin-bottom: var(--space-6);
+}
+
+ul,
+ol {
+    padding-left: var(--space-6);
+}
+
+li + li {
+    margin-top: var(--space-2);
+}
+
+blockquote {
+    margin-inline: 0;
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-border);
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin-block: var(--space-8);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-8) 0;
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+}
+
+th,
+td {
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    text-align: left;
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+pre {
+    overflow-x: auto;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--space-2);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+pre code {
+    font-size: inherit;
+}
+
+:not(pre) > code {
+    padding: 0.15em 0.35em;
+    background: rgba(127, 127, 127, 0.12);
+    border-radius: var(--space-1);
+    font-size: 0.9em;
+}
+
+@media (max-width: 30rem) {
+    html {
+        font-size: var(--font-size-mobile);
+    }
+}

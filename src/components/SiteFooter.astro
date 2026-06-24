@@ -1,55 +1,74 @@
 ---
 const currentYear = new Date().getFullYear();
-const license = { name: "CC BY 4.0", url: "https://creativecommons.org/licenses/by/4.0/" };
+const siteCredits = [
+    {
+        label: "License",
+        url: "https://creativecommons.org/licenses/by/4.0/",
+        text: "CC BY 4.0"
+    },
+    {
+        label: "Colophon",
+        url: "/colophon",
+        text: "Colophon"
+    },
+    {
+        label: "GitHub repository",
+        url: "https://github.com/eordo/eordonez",
+        text: "Source"
+    },
+];
 ---
 
 <footer class="site-footer">
-    <div class="site-footer-inner">
-        <div class="site-credits">
-            <span>&copy; {currentYear} Eric Ordoñez</span>
-            <span><a href={license.url}>{license.name}</a></span>
-            <span><a href="/colophon">Colophon</a></span>
-            <span><a href="https://github.com/eordo/eordonez">Source</a></span>
-        </div>
-        <span title="Terror Lake salutes Hannibal crossing the Alps!">Aut inveniam viam aut faciam.</span>
+    <div class="site-footer-content">
+        <span>&copy; {currentYear} Eric Ordoñez</span>
+        <ul class="site-credits">
+            {siteCredits.map((siteCredit) => (
+                <li>
+                    <a href={siteCredit.url} aria-label={siteCredit.label}>
+                        {siteCredit.text}
+                    </a>
+                </li>
+            ))}
+        </ul>
+        <span title="Terror Lake salutes Hannibal crossing the Alps!">
+            Aut inveniam viam aut faciam.
+        </span>
     </div>
 </footer>
 
 <style>
     .site-footer {
-        grid-area: footer;
-        border-top: 1px solid var(--color-border);
+        width: 100vw;
+        border-top: 2px solid var(--color-border);
     }
 
-    .site-footer-inner {
-        padding: var(--space-4) 0;
+    .site-footer-content {
         display: flex;
         flex-direction: column;
+        width: min(var(--max-layout-width), 100vw);
+        margin-inline: auto;
+        padding: var(--space-6);
         gap: var(--space-2);
-        font-family: var(--font-sans);        
         font-size: var(--step--1);
         color: var(--color-muted);
     }
 
     .site-credits {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-2);
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
 
-    .site-credits > * + *::before {
-        content: "·";
-        margin-right: var(--space-2);
+    .site-credits li {
+        display: inline;
+    }
+    
+    .site-credits li:first-child {
+        padding-right: var(--space-2);
     }
 
-    @media (max-width: 30rem) {
-        .site-credits {
-            flex-direction: column;
-        }
-
-        .site-credits > * + *::before {
-            content: "";
-            margin-right: 0;
-        }
+    .site-credits li:not(:first-child) {
+        padding: 0 var(--space-2);
     }
 </style>

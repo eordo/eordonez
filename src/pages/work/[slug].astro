@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
 
 import { getCollection, render } from "astro:content";
 
@@ -16,9 +17,13 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
+    <PageHeader
+        title={post.data.title}
+        subtitle={post.data.description}
+        contentType="work"
+        primaryTag={post.data.primaryTag}
+    />
     <article>
-        <h1>{post.data.title}</h1>
-        <p>{post.data.pubDate.toLocaleDateString()}</p>
         <Content />
     </article>
 </BaseLayout>
