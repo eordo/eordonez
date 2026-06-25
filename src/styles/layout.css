@@ -23,8 +23,9 @@
     grid-column: span 3;
 }
 
-@media (max-width: 48rem) {
+@media screen and (max-width: 1023px) {
     .grid.cols-3 {
         grid-template-columns: 1fr;
+        column-gap: 0;
     }
 }

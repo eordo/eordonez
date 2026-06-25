@@ -37,7 +37,6 @@
     
     /* Layout */
     --max-layout-width: 1200px;
-    --content-width: 40rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -203,7 +202,7 @@ pre code {
     font-size: 0.9em;
 }
 
-@media (max-width: 30rem) {
+@media screen and (max-width: 767px) {
     html {
         font-size: var(--font-size-mobile);
     }
