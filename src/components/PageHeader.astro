@@ -4,10 +4,11 @@ const {
     subtitle,
     contentType = null,
     primaryTag = null,
+    isContentPost = false,
 } = Astro.props;
 ---
 
-<header class="page-header">
+<header class:list={["page-header", { "col-span-2": isContentPost }]}>
     <div class="page-header-meta">
         {contentType && <a href={`/${contentType}`}>{contentType}</a>}
         {contentType && primaryTag && <span>/</span>}

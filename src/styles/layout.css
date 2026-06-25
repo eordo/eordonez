@@ -28,4 +28,9 @@
         grid-template-columns: 1fr;
         column-gap: 0;
     }
+
+    .col-span-2,
+    .col-span-3 {
+        grid-column: span 1;
+    }
 }
