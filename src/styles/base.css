@@ -130,6 +130,11 @@ h4 {
     font-weight: 600;
 }
 
+.prose h2,
+.prose h3 {
+    scroll-margin-top: calc(var(--space-8));
+}
+
 p,
 ul,
 ol,
@@ -205,5 +210,12 @@ pre code {
 @media screen and (max-width: 767px) {
     html {
         font-size: var(--font-size-mobile);
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .prose h2,
+    .prose h3 {
+        scroll-margin-top: calc(var(--space-8) + 3rem);
     }
 }
