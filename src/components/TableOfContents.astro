@@ -8,29 +8,40 @@ interface Heading {
 const { headings } = Astro.props;
 ---
 
-<nav class="toc">
-    <span class="toc-title">Table of contents</span>
-    <ol>
-        {headings.map((heading: Heading) => (
-            <li class={`depth-${heading.depth}`}>
-                <a href={`#${heading.slug}`}>
-                    {heading.text}
-                </a>
-            </li>
-        ))}
-    </ol>
-</nav>
+<aside class="toc">
+    <nav class="toc-desktop card">
+        <span class="title">Table of contents</span>
+        <ol>
+            {headings.map((heading: Heading) => (
+                <li class={`depth-${heading.depth}`}>
+                    <a href={`#${heading.slug}`}>
+                        {heading.text}
+                    </a>
+                </li>
+            ))}
+        </ol>
+    </nav>
+    <details class="toc-mobile card collapsible">
+        <summary class="title">Table of contents</summary>
+        <ol>
+            {headings.map((heading: Heading) => (
+                <li class={`depth-${heading.depth}`}>
+                    <a href={`#${heading.slug}`}>
+                        {heading.text}
+                    </a>
+                </li>
+            ))}
+        </ol>
+    </details>
+</aside>
 
 <style>
     .toc {
         position: sticky;
         top: var(--space-8);
+        z-index: 10;
+        background: var(--color-bg);
         font-size: var(--step--1);
-    }
-
-    .toc .toc-title {
-        color: var(--color-text);
-        font-weight: 600;
     }
 
     .toc ol {
@@ -48,18 +59,41 @@ const { headings } = Astro.props;
     }
 
     .toc a {
-        color: var(--color-muted);
+        color: var(--color-text);
         text-decoration: none;
         transition: color 150ms;
     }
 
-    .toc a:hover {
-        color: var(--color-text);
+    .toc a:hover,
+    .toc a.active {
+        font-weight: 600;
     }
 
-    .toc a.active {
-        color: var(--color-text);
-        font-weight: 600;
+    .toc-desktop {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        padding: var(--space-4);
+    }
+
+    .toc-mobile {
+        display: none;
+        padding: var(--space-2) var(--space-4);
+    }
+
+    @media screen and (max-width: 1023px) {
+        .toc {
+            grid-column: span 1;
+            top: 0;
+        }
+
+        .toc-desktop {
+            display: none;
+        }
+
+        .toc-mobile {
+            display: block;
+        }
     }
 </style>
 
@@ -89,4 +123,12 @@ const { headings } = Astro.props;
     document
         .querySelectorAll("h2, h3")
         .forEach(h => observer.observe(h));
+
+    const mobileToc = document.querySelector(".toc-mobile");
+
+    mobileToc?.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            mobileToc.removeAttribute("open");
+        });
+    });
 </script>
