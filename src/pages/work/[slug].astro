@@ -26,7 +26,7 @@ const { Content, headings } = await render(post);
             primaryTag={post.data.primaryTag}
             isContentPost={true}
         />
-        <TableOfContents headings={headings} />
+        {headings.length > 0 && <TableOfContents headings={headings} />}
         <article class="prose col-span-2">
             <Content />
         </article>
