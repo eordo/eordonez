@@ -48,8 +48,6 @@ export const site: SiteConfig = {
   nav: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-    { label: "Legal", href: "/legal" }
   ],
   seo: {
     ogImage: "/images/og/og-default.jpg",
