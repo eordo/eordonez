@@ -29,20 +29,18 @@ export type SiteConfig = {
 };
 
 export const site: SiteConfig = {
-  name: "Astro Baseline",
-  tagline: "A boring, production-ready Astro starter.",
+  name: "Eric Ordoñez",
+  tagline: "Ahoy-hoy!",
   description:
-    "Astro Baseline is a minimal HTML-first starter with senior defaults: SEO, JSON-LD, a11y basics, and clean structure.",
+    "I am a data scientist, researcher, and occasional pub trivia winner.",
   url: import.meta.env.SITE_URL ?? "https://example.com",
   locale: "en",
   author: {
-    name: "Your Name",
-    email: "hello@example.com",
-    url: "https://example.com",
+    name: "Eric Ordoñez",
+    url: import.meta.env.SITE_URL ?? "https://example.com",
     socials: {
-      x: "https://x.com/yourhandle",
-      github: "https://github.com/yourhandle",
-      linkedin: "https://www.linkedin.com/in/yourhandle/"
+      github: "https://github.com/eordo",
+      linkedin: "https://www.linkedin.com/in/eordo/"
     }
   },
   nav: [
