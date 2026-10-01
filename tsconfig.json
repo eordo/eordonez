@@ -5,6 +5,13 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "target": "ES2020",
-    "types": ["astro/client"]
+    "types": ["astro/client"],
+    "paths": {
+      "@/components/*": ["./src/components/*"],
+      "@/content/*": ["./src/content/*"],
+      "@/images/*": ["./src/assets/images/*"],
+      "@/layouts/*": ["./src/layouts/*"],
+      "@/styles/*": ["./src/styles/*"],
+    }
   }
 }

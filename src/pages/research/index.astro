@@ -1,0 +1,61 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { site } from "@/content/site";
+
+const pageTitle = "Research and Projects";
+const pageDescription = "Selected research, academic projects, and technical demonstrations.";
+
+const entries = await getCollection("research");
+entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const research = entries.filter((entry) => entry.data.type === "research");
+const projects = entries.filter((entry) => entry.data.type !== "research");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: new URL("/research/", site.url).href,
+  inLanguage: site.locale,
+  isPartOf: {
+    "@type": "WebSite",
+    name: site.name,
+    url: site.url
+  }
+};
+---
+
+<Base
+  title=`${pageTitle} — ${site.name}`
+  description={pageDescription}
+  canonicalPath="/research"
+  jsonLd={jsonLd}
+>
+  <article class="prose">
+    <h1>{pageTitle}</h1>
+    <p class="lead">{pageDescription}</p>
+
+    {research.length !== 0 && 
+      <section class="block">
+        <h2>Research</h2>
+        <ul>
+          {research.map((item) => (
+            <li><a href={`/research/${item.id}`}>{item.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    }
+
+    {projects.length !== 0 &&
+      <section class="block">
+        <h2>Projects</h2>
+        <ul>
+          {projects.map((item) => (
+            <li><a href={`/research/${item.id}`}>{item.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    }
+  </article>
+</Base>

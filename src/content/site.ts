@@ -45,6 +45,7 @@ export const site: SiteConfig = {
   },
   nav: [
     { label: "Home", href: "/" },
+    { label: "Research", href: "/research" },
   ],
   seo: {
     ogImage: "/images/og/og-default.jpg",
