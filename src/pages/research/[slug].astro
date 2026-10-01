@@ -1,0 +1,49 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+import { site } from "@/content/site";
+
+export async function getStaticPaths() {
+  const items = await getCollection("research");
+  return items.map((item) => ({
+    params: {
+      slug: item.id,
+    },
+    props: {
+      item,
+    },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ResearchProject",
+  name: item.data.title,
+  description: item.data.description,
+  url: new URL(`/research/${item.id}/`, site.url).href,
+  inLanguage: site.locale,
+  author: {
+    "@type": "Person",
+    name: site.author
+  },
+  isPartOf: {
+    "@type": "CollectionPage",
+    name: "Research and Projects",
+    url: new URL("/research/", site.url).href
+  }
+};
+---
+
+<Base
+  title={item.data.title}
+  description={item.data.description}
+  jsonLd={jsonLd}
+>
+  <article class="prose">
+    <h1>{item.data.title}</h1>
+    <p class="lead">{item.data.description}</p>
+    <Content />
+  </article>
+</Base>
