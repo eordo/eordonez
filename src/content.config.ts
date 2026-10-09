@@ -36,6 +36,17 @@ const research = defineCollection({
   }),
 });
 
+const now = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/now",
+  }),
+  schema: z.object({
+    date: z.coerce.date(),
+  })
+})
+
 export const collections = {
   research,
+  now,
 };
