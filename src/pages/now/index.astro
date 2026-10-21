@@ -1,0 +1,79 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+import { site } from "@/content/site";
+
+const pageTitle = "Now";
+const pageDescription = "An irregularly updated log of what I am up to now.";
+
+const now = await getCollection("now");
+now.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const renderedUpdates = await Promise.all(
+  now.map(async (update) => ({
+    ...update,
+    rendered: await render(update),
+  }))
+);
+const [latest, ...oldUpdates] = renderedUpdates;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: new URL("/now/", site.url).href,
+  inLanguage: site.locale,
+  dateModified: latest
+    ? latest.data.date.toISOString().slice(0, 10)
+    : undefined,
+  isPartOf: {
+    "@type": "WebSite",
+    name: site.name,
+    url: site.url
+  },
+};
+---
+
+<Base
+  title=`${pageTitle} - ${site.name}`;
+  description={pageDescription};
+  canonicalPath="/now"
+  jsonLd={jsonLd}
+>
+  <article class="prose">
+    <h1>{pageTitle}</h1>
+    <p class="lead">{pageDescription}</p>
+
+    {latest && 
+      <section id="latest-update" class="block">
+        <h2>
+          <time datetime={latest.data.date.toISOString()}>
+            {latest.data.date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              timeZone: "UTC",
+            })}
+          </time>
+        </h2>
+        <latest.rendered.Content />
+      </section>
+    }
+
+    {oldUpdates.length !== 0 &&
+      <section id="previous-updates" class="block">
+        {oldUpdates.map((update) => (
+          <h2>
+            <time datetime={update.data.date.toISOString()}>
+              {update.data.date.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                timeZone: "UTC",
+              })}
+            </time>
+          </h2>
+          <update.rendered.Content />
+        ))}
+      </section>
+    }
+  </article>
+</Base>
